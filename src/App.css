@@ -3,7 +3,17 @@
   padding: 30px;
 }
 
-/* Product Item */
+
+/* Product Items */
+.product-items {
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.product-items-list {
+  margin: 30px 0;
+}
+
 .product-item {
   width: 400px;
 }

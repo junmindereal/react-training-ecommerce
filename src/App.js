@@ -1,11 +1,11 @@
 import { products } from './data/products'
 import './App.css'
 
-const showProductInfo = (product) => {
-  console.log(product)
-}
-
 function App () {
+  const showProductInfo = (product) => {
+    console.log(product)
+  }
+
   return (
     <main className='main'>
       <ul className='product-items'>
@@ -21,11 +21,7 @@ function App () {
                   : <span>price: {product.price}</span>}
               </li>
               {product.sizes
-                ? <li className='product-item-size'>size:
-                  {product.sizes.map((size, index, arr) => (
-                    arr.length - 1 === index ? size : ` ${size}, `
-                  ))}
-                </li>
+                ? <li className='product-item-size'>size: {product.sizes.join(',')} </li>
                 : null}
               <li className='product-item-img'><img src={product.img} alt={product.description} /></li>
             </ul>

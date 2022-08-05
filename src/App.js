@@ -1,30 +1,31 @@
+import { useState } from 'react'
 import { products } from './data/products'
+import { Product } from './components/Product'
+import { NewProductForm } from './components/NewProductForm'
 import './App.css'
 
 function App () {
-  const showProductInfo = (product) => {
-    console.log(product)
-  }
+  const [name, setName] = useState('')
+  const [sku, setSku] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
 
   return (
     <main className='main'>
+      <NewProductForm
+        name={name}
+        onNameChange={setName}
+        sku={sku}
+        onSkuChange={setSku}
+        description={description}
+        onDescriptionChange={setDescription}
+        price={price}
+        onPriceChange={setPrice}
+      />
       <ul className='product-items'>
         {products.map(product => (
           <li key={product.sku} className='product-items-list'>
-            <ul className='product-item' onClick={() => showProductInfo(product)}>
-              <li className='product-item-name'><span>name: {product.name}</span></li>
-              <li className='product-item-sku'><span>sku: {product.sku}</span></li>
-              <li className='product-item-desc'><span>description: {product.description}</span></li>
-              <li className='product-item-price'>
-                {!product.inStock
-                  ? <span>price: {product.price}</span>
-                  : <span> Out of Stock </span>}
-              </li>
-              {product.sizes
-                ? <li className='product-item-size'>size: {product.sizes.join(',')} </li>
-                : null}
-              <li className='product-item-img'><img src={product.img} alt={product.description} /></li>
-            </ul>
+            <Product product={product} />
           </li>
         ))}
       </ul>

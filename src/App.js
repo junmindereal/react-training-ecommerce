@@ -1,7 +1,11 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import { products } from './data/products'
-import { Product } from './components/Product'
+import { Products } from './components/Products'
+import { ProductDetail } from './components/ProductDetail'
 import { NewProductForm } from './components/NewProductForm'
+import { Nav } from './components/Nav'
 import './App.css'
 
 function App () {
@@ -19,19 +23,25 @@ function App () {
   }
 
   return (
-    <main className='main'>
-      <NewProductForm
-        defaultValues={defaultValues}
-        onSubmit={onSubmit}
-      />
-      <ul className='product-items'>
-        {products.map(product => (
-          <li key={product.sku} className='product-items-list'>
-            <Product product={product} />
-          </li>
-        ))}
-      </ul>
-    </main>
+    <Router>
+      <main className='main'>
+        <Nav />
+        <Switch>
+          <Route exact path='/'>
+            <NewProductForm
+              defaultValues={defaultValues}
+              onSubmit={onSubmit}
+            />
+          </Route>
+          <Route exact path='/products'>
+            <Products products={products} />
+          </Route>
+          <Route path='/products/:sku'>
+            <ProductDetail />
+          </Route>
+        </Switch>
+      </main>
+    </Router>
   )
 }
 

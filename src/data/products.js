@@ -16,7 +16,8 @@ export const products = [
         description: 'Mara floral faille midi dress',
         price: '1,295',
         sizes: [34, 36, 38],
-        type: 'clothes'
+        type: 'clothes',
+        inStock: true
     },
     {
         name: 'Balmain',
@@ -25,7 +26,8 @@ export const products = [
         description: 'Square-neck wool minidress',
         price: '1,455',
         sizes: [28, 30],
-        type: 'clothes'
+        type: 'clothes',
+        inStock: true
     },
     {
         name: 'Dolce&Gabbana',
@@ -34,7 +36,8 @@ export const products = [
         description: 'Printed cotton poplin minidress',
         price: '839',
         sizes: [28, 30, 32, 34],
-        type: 'clothes'
+        type: 'clothes',
+        inStock: true
     },
     {
         name: 'Dolce&Gabbana',
@@ -43,7 +46,8 @@ export const products = [
         description: 'Ruffled faille midi dress',
         price: '2509',
         sizes: [32, 34],
-        type: 'clothes'
+        type: 'clothes',
+        inStock: false
     },
     {
         name: 'Christian Louboutin',
@@ -51,7 +55,8 @@ export const products = [
         img: P00667934,
         description: 'Cabarock Small leather tote bag',
         price: '1085',
-        type: 'bag'
+        type: 'bag',
+        inStock: false
     },
     {
         name: 'Givenchy',
@@ -59,7 +64,8 @@ export const products = [
         img: P00693032,
         description: 'Moon Cut Out Small canvas shoulder bag',
         price: '820',
-        type: 'bag'
+        type: 'bag',
+        inStock: true
     },
     {
         name: 'Malone Souliers',
@@ -68,7 +74,8 @@ export const products = [
         description: 'Satin platform sandals',
         price: '529',
         sizes: [35, 36, 37, 38],
-        type: 'shoes'
+        type: 'shoes',
+        inStock: true
     },
     {
         name: 'Souliers Martinez',
@@ -77,7 +84,8 @@ export const products = [
         description: 'Springs leather platform sandals',
         price: '329',
         sizes: [36, 38, 39],
-        type: 'shoes'
+        type: 'shoes',
+        inStock: true
     },
     {
         name: 'Valentino Garavani',
@@ -86,6 +94,7 @@ export const products = [
         description: 'Rockstud embellished leather pumps',
         price: '1465',
         sizes: [38],
-        type: 'shoes'
+        type: 'shoes',
+        inStock: true
     },
 ]

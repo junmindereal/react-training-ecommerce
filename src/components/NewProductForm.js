@@ -1,14 +1,25 @@
-export function NewProductForm ({ name, onNameChange, sku, onSkuChange, description, onDescriptionChange, price, onPriceChange }) {
-  const handleSubmit = (e) => {
-    e.preventDefault()
+import { useState } from 'react'
 
-    const product = { name, sku, description, price }
+export function NewProductForm ({ defaultValues, onSubmit }) {
+  const [product, setProduct] = useState(defaultValues)
 
-    console.log(product)
-    onNameChange('')
-    onSkuChange('')
-    onDescriptionChange('')
-    onPriceChange('')
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    onSubmit(product)
+  }
+
+  const onChange = (event) => {
+    const { name, value } = event.target
+
+    setProduct({
+      ...product,
+      [name]: value
+    })
+  }
+
+  const handleOnInvalid = (event) => {
+    event.target.setCustomValidity('This field is required')
   }
 
   return (
@@ -17,36 +28,40 @@ export function NewProductForm ({ name, onNameChange, sku, onSkuChange, descript
         <input
           type='text'
           required
-          value={name}
-          onChange={(e) => onNameChange(e.target.value)}
-          onInvalid={(e) => e.target.setCustomValidity('This field is required')}
+          name='name'
+          value={product.name}
+          onChange={(event) => onChange(event)}
+          onInvalid={(event) => handleOnInvalid(event)}
         />
       </label>
       <label> Sku:
         <input
           type='text'
           required
-          value={sku}
-          onChange={(e) => onSkuChange(e.target.value)}
-          onInvalid={(e) => e.target.setCustomValidity('This field is required')}
+          name='sku'
+          value={product.sku}
+          onChange={(event) => onChange(event)}
+          onInvalid={(event) => handleOnInvalid(event)}
         />
       </label>
       <label> Description:
         <input
           type='text'
           required
-          value={description}
-          onChange={(e) => onDescriptionChange(e.target.value)}
-          onInvalid={(e) => e.target.setCustomValidity('This field is required')}
+          name='description'
+          value={product.description}
+          onChange={(event) => onChange(event)}
+          onInvalid={(event) => handleOnInvalid(event)}
         />
       </label>
       <label> Price:
         <input
           type='number'
           required
-          value={price}
-          onChange={(e) => onPriceChange(e.target.value)}
-          onInvalid={(e) => e.target.setCustomValidity('This field is required')}
+          name='price'
+          value={product.price}
+          onChange={(event) => onChange(event)}
+          onInvalid={(event) => handleOnInvalid(event)}
         />
       </label>
       <button>Add Product</button>

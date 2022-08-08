@@ -5,22 +5,24 @@ import { NewProductForm } from './components/NewProductForm'
 import './App.css'
 
 function App () {
-  const [name, setName] = useState('')
-  const [sku, setSku] = useState('')
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState('')
+  const data = {
+    name: '',
+    sku: '',
+    description: '',
+    price: 0
+  }
+
+  const [defaultValues, setDefaultValues] = useState(data)
+
+  const onSubmit = (product) => {
+    setDefaultValues(product)
+  }
 
   return (
     <main className='main'>
       <NewProductForm
-        name={name}
-        onNameChange={setName}
-        sku={sku}
-        onSkuChange={setSku}
-        description={description}
-        onDescriptionChange={setDescription}
-        price={price}
-        onPriceChange={setPrice}
+        defaultValues={defaultValues}
+        onSubmit={onSubmit}
       />
       <ul className='product-items'>
         {products.map(product => (

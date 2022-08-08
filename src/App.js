@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { products } from './data/products'
 import { Products } from './components/Products'
@@ -23,25 +23,14 @@ function App () {
   }
 
   return (
-    <Router>
-      <main className='main'>
-        <Nav />
-        <Switch>
-          <Route exact path='/'>
-            <NewProductForm
-              defaultValues={defaultValues}
-              onSubmit={onSubmit}
-            />
-          </Route>
-          <Route exact path='/products'>
-            <Products products={products} />
-          </Route>
-          <Route path='/products/:sku'>
-            <ProductDetail />
-          </Route>
-        </Switch>
-      </main>
-    </Router>
+    <main className='main'>
+      <Nav />
+      <Routes>
+        <Route exact path='/' element={<NewProductForm defaultValues={defaultValues} onSubmit={onSubmit} />} />
+        <Route exact path='/products' element={<Products products={products} />} />
+        <Route path='/products/:sku' element={<ProductDetail />} />
+      </Routes>
+    </main>
   )
 }
 

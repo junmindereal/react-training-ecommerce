@@ -16,7 +16,7 @@ export function Products ({ products }) {
             <li className='product-item-sku'><span>sku: {product.sku}</span></li>
             <li className='product-item-desc'><span>description: {product.description}</span></li>
             <li className='product-item-price'>
-              {!product.inStock
+              {product.inStock
                 ? <span>price: {product.price}</span>
                 : <span> Out of Stock </span>}
             </li>

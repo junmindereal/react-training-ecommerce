@@ -30,8 +30,8 @@ export function NewProductForm ({ defaultValues, onSubmit }) {
           required
           name='name'
           value={product.name}
-          onChange={(event) => onChange(event)}
-          onInvalid={(event) => handleOnInvalid(event)}
+          onChange={onChange}
+          onInvalid={handleOnInvalid}
         />
       </label>
       <label> Sku:
@@ -40,8 +40,8 @@ export function NewProductForm ({ defaultValues, onSubmit }) {
           required
           name='sku'
           value={product.sku}
-          onChange={(event) => onChange(event)}
-          onInvalid={(event) => handleOnInvalid(event)}
+          onChange={onChange}
+          onInvalid={handleOnInvalid}
         />
       </label>
       <label> Description:
@@ -50,8 +50,8 @@ export function NewProductForm ({ defaultValues, onSubmit }) {
           required
           name='description'
           value={product.description}
-          onChange={(event) => onChange(event)}
-          onInvalid={(event) => handleOnInvalid(event)}
+          onChange={onChange}
+          onInvalid={handleOnInvalid}
         />
       </label>
       <label> Price:
@@ -60,8 +60,8 @@ export function NewProductForm ({ defaultValues, onSubmit }) {
           required
           name='price'
           value={product.price}
-          onChange={(event) => onChange(event)}
-          onInvalid={(event) => handleOnInvalid(event)}
+          onChange={onChange}
+          onInvalid={handleOnInvalid}
         />
       </label>
       <button>Add Product</button>

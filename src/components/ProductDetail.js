@@ -8,7 +8,7 @@ export function ProductDetail () {
   return (
     <div>
       <h1>{product.name}</h1>
-      {!product.inStock
+      {product.inStock
         ? <p>price: {product.price}</p>
         : <p> Out of Stock </p>}
       <p>Description: {product.description}</p>

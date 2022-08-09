@@ -14,7 +14,7 @@ export const products = [
         sku: 'P00704075',
         img: P00704075,
         description: 'Mara floral faille midi dress',
-        price: '1,295',
+        price: 1295,
         sizes: [34, 36, 38],
         type: 'clothes',
         inStock: true
@@ -24,7 +24,7 @@ export const products = [
         sku: 'P00701158',
         img: P00701158,
         description: 'Square-neck wool minidress',
-        price: '1,455',
+        price: 1455,
         sizes: [28, 30],
         type: 'clothes',
         inStock: true
@@ -34,7 +34,7 @@ export const products = [
         sku: 'P00705201',
         img: P00705201,
         description: 'Printed cotton poplin minidress',
-        price: '839',
+        price: 839,
         sizes: [28, 30, 32, 34],
         type: 'clothes',
         inStock: true
@@ -44,7 +44,7 @@ export const products = [
         sku: 'P00695839',
         img: P00695839,
         description: 'Ruffled faille midi dress',
-        price: '2509',
+        price: 2509,
         sizes: [32, 34],
         type: 'clothes',
         inStock: false
@@ -54,7 +54,7 @@ export const products = [
         sku: 'P00667934',
         img: P00667934,
         description: 'Cabarock Small leather tote bag',
-        price: '1085',
+        price: 1085,
         type: 'bag',
         inStock: false
     },
@@ -63,7 +63,7 @@ export const products = [
         sku: 'P00693032',
         img: P00693032,
         description: 'Moon Cut Out Small canvas shoulder bag',
-        price: '820',
+        price: 820,
         type: 'bag',
         inStock: true
     },
@@ -72,7 +72,7 @@ export const products = [
         sku: 'P00713770',
         img: P00713770,
         description: 'Satin platform sandals',
-        price: '529',
+        price: 529,
         sizes: [35, 36, 37, 38],
         type: 'shoes',
         inStock: true
@@ -82,7 +82,7 @@ export const products = [
         sku: 'P00717616',
         img: P00717616,
         description: 'Springs leather platform sandals',
-        price: '329',
+        price: 329,
         sizes: [36, 38, 39],
         type: 'shoes',
         inStock: true
@@ -92,7 +92,7 @@ export const products = [
         sku: 'P00694104',
         img: P00694104,
         description: 'Rockstud embellished leather pumps',
-        price: '1465',
+        price: 1465,
         sizes: [38],
         type: 'shoes',
         inStock: true

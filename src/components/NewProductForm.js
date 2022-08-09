@@ -7,6 +7,13 @@ export function NewProductForm ({ defaultValues, onSubmit }) {
     event.preventDefault()
 
     onSubmit(product)
+
+    setProduct({
+      name: '',
+      sku: '',
+      description: '',
+      price: 0
+    })
   }
 
   const onChange = (event) => {

@@ -1,7 +1,12 @@
 import { useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+
 import { products } from './data/products'
-import { Product } from './components/Product'
+import { Products } from './components/Products'
+import { ProductDetail } from './components/ProductDetail'
 import { NewProductForm } from './components/NewProductForm'
+import { Nav } from './components/Nav'
+import { NotFound } from './components/NotFound'
 import './App.css'
 
 function App () {
@@ -20,17 +25,13 @@ function App () {
 
   return (
     <main className='main'>
-      <NewProductForm
-        defaultValues={defaultValues}
-        onSubmit={onSubmit}
-      />
-      <ul className='product-items'>
-        {products.map(product => (
-          <li key={product.sku} className='product-items-list'>
-            <Product product={product} />
-          </li>
-        ))}
-      </ul>
+      <Nav />
+      <Routes>
+        <Route path='/' element={<NewProductForm defaultValues={defaultValues} onSubmit={onSubmit} />} />
+        <Route path='/products' element={<Products products={products} />} />
+        <Route path='/products/:sku' element={<ProductDetail />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </main>
   )
 }

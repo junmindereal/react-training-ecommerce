@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { products } from './data/products'
 import { Products } from './components/Products'
 import { ProductDetail } from './components/ProductDetail'
 import { NewProductForm } from './components/NewProductForm'
@@ -28,7 +27,7 @@ function App () {
       <Nav />
       <Routes>
         <Route path='/' element={<NewProductForm defaultValues={defaultValues} onSubmit={onSubmit} />} />
-        <Route path='/products' element={<Products products={products} />} />
+        <Route path='/products' element={<Products />} />
         <Route path='/products/:sku' element={<ProductDetail />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

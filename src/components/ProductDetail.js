@@ -1,12 +1,35 @@
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { getProduct } from '../api'
 import { NotFound } from './NotFound'
-import { products } from '../data/products'
 
 export function ProductDetail () {
   const { sku } = useParams()
-  const product = products.find(product => product.sku === sku)
+  const [product, setProduct] = useState({})
+  const [isLoading, setIsloading] = useState(true)
+  const [notFound, setNotFound] = useState({ isNotFound: false, errorMessage: '' })
 
-  if (product) {
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await getProduct(sku)
+        setProduct(res)
+        setIsloading(false)
+      } catch (error) {
+        setIsloading(false)
+        setNotFound({
+          isNotFound: true,
+          errorMessage: error.message
+        })
+      }
+    }
+
+    fetchProduct()
+  }, [])
+
+  if (isLoading) {
+    return <p>loading...</p>
+  } else if (product && !notFound) {
     return (
       <div>
         <h1>{product.name}</h1>
@@ -19,6 +42,6 @@ export function ProductDetail () {
       </div>
     )
   } else {
-    return <NotFound />
+    return <NotFound notFound={notFound} />
   }
 }

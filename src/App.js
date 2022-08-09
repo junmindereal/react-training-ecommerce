@@ -6,6 +6,7 @@ import { Products } from './components/Products'
 import { ProductDetail } from './components/ProductDetail'
 import { NewProductForm } from './components/NewProductForm'
 import { Nav } from './components/Nav'
+import { NotFound } from './components/NotFound'
 import './App.css'
 
 function App () {
@@ -26,9 +27,10 @@ function App () {
     <main className='main'>
       <Nav />
       <Routes>
-        <Route exact path='/' element={<NewProductForm defaultValues={defaultValues} onSubmit={onSubmit} />} />
-        <Route exact path='/products' element={<Products products={products} />} />
+        <Route path='/' element={<NewProductForm defaultValues={defaultValues} onSubmit={onSubmit} />} />
+        <Route path='/products' element={<Products products={products} />} />
         <Route path='/products/:sku' element={<ProductDetail />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </main>
   )

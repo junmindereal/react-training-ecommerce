@@ -25,23 +25,20 @@ export function ProductDetail () {
     }
 
     fetchProduct()
-  }, [])
+  }, [sku])
 
-  if (isLoading) {
-    return <p>loading...</p>
-  } else if (product && !notFound) {
-    return (
-      <div>
-        <h1>{product.name}</h1>
-        {product.inStock
-          ? <p>price: {product.price}</p>
-          : <p> Out of Stock </p>}
-        <p>Description: {product.description}</p>
-        <p>SKU: {product.sku}</p>
-        <img src={product.img} alt={product.description} />
-      </div>
-    )
-  } else {
-    return <NotFound notFound={notFound} />
-  }
+  if (isLoading) return <p>loading...</p>
+  if (notFound.isNotFound) return <NotFound notFound={notFound} />
+
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      {product.inStock
+        ? <p>price: {product.price}</p>
+        : <p> Out of Stock </p>}
+      <p>Description: {product.description}</p>
+      <p>SKU: {product.sku}</p>
+      <img src={product.img} alt={product.description} />
+    </div>
+  )
 }

@@ -14,9 +14,10 @@ export const ProductListProvider = ({ children }) => {
         const res = await getProductsList()
         setProductList(res)
         setProducts(res)
-        setIsloading(false)
       } catch (error) {
         console.log(error)
+      } finally {
+        setIsloading(false)
       }
     }
 
@@ -24,7 +25,7 @@ export const ProductListProvider = ({ children }) => {
   }, [])
 
   return (
-    <ProductListContext.Provider value={{ productList, products, setProducts, isLoading, setIsloading }}>
+    <ProductListContext.Provider value={{ productList, products, setProducts, isLoading }}>
       {children}
     </ProductListContext.Provider>
   )

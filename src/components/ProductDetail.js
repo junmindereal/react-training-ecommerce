@@ -7,8 +7,7 @@ export function ProductDetail () {
   const { sku } = useParams()
   const [product, setProduct] = useState()
   const [isError, setIsError] = useState(false)
-  const [isLoading, setIsloading] = useState(true)
-  const { productList } = useContext(ProductListContext)
+  const { productList, isLoading } = useContext(ProductListContext)
   const { addToCart, isAlreadyAddedToCart } = useContext(CartContext)
 
   const handleAddToCart = () => {
@@ -17,7 +16,6 @@ export function ProductDetail () {
 
   useEffect(() => {
     if (productList.length > 0) {
-      setIsloading(false)
       const product = productList.find(product => product.sku === sku)
       if (!product) return setIsError(true)
       setProduct(product)

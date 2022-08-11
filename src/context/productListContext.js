@@ -5,7 +5,6 @@ export const ProductListContext = createContext()
 
 export const ProductListProvider = ({ children }) => {
   const [productList, setProductList] = useState([])
-  const [products, setProducts] = useState([])
   const [isLoading, setIsloading] = useState(true)
 
   useEffect(() => {
@@ -13,7 +12,6 @@ export const ProductListProvider = ({ children }) => {
       try {
         const res = await getProductsList()
         setProductList(res)
-        setProducts(res)
       } catch (error) {
         console.log(error)
       } finally {
@@ -25,7 +23,7 @@ export const ProductListProvider = ({ children }) => {
   }, [])
 
   return (
-    <ProductListContext.Provider value={{ productList, products, setProducts, isLoading }}>
+    <ProductListContext.Provider value={{ productList, isLoading }}>
       {children}
     </ProductListContext.Provider>
   )

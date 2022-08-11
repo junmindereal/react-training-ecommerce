@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { ProductListContext } from '../context/productListContext'
 
 export function Products () {
-  const { productList, products, setProducts, isLoading } = useContext(ProductListContext)
+  const { productList, isLoading } = useContext(ProductListContext)
+  const [products, setProducts] = useState([])
   const [filter, setFilter] = useState('all')
   const [sort, setSort] = useState('name')
 

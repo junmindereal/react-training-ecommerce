@@ -4,7 +4,6 @@ export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
-  const [isAlreadyAddedToCart, setIsAlreadyAddedToCart] = useState(false)
 
   const removeFromCart = (sku) => {
     const newCartItems = cartItems.filter(product => sku !== product.sku)
@@ -12,15 +11,11 @@ export const CartProvider = ({ children }) => {
   }
 
   const addToCart = (product) => {
-    if (cartItems.some(item => item.sku === product.sku)) {
-      setIsAlreadyAddedToCart(true)
-    } else {
-      setCartItems(prev => [...prev, product])
-    }
+    setCartItems(prev => [...prev, product])
   }
 
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems, removeFromCart, addToCart, isAlreadyAddedToCart }}>
+    <CartContext.Provider value={{ cartItems, setCartItems, removeFromCart, addToCart }}>
       {children}
     </CartContext.Provider>
   )

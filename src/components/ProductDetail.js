@@ -5,13 +5,18 @@ import { CartContext } from '../context/cartContext'
 
 export function ProductDetail () {
   const { sku } = useParams()
+  const { productList, isLoading } = useContext(ProductListContext)
+  const { cartItems, addToCart } = useContext(CartContext)
   const [product, setProduct] = useState()
   const [isError, setIsError] = useState(false)
-  const { productList, isLoading } = useContext(ProductListContext)
-  const { addToCart, isAlreadyAddedToCart } = useContext(CartContext)
+  const [isAlreadyAddedToCart, setIsAlreadyAddedToCart] = useState(false)
 
   const handleAddToCart = () => {
-    addToCart(product)
+    if (cartItems.some(item => item.sku === product.sku)) {
+      setIsAlreadyAddedToCart(true)
+    } else {
+      addToCart(product)
+    }
   }
 
   useEffect(() => {

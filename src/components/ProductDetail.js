@@ -1,69 +1,56 @@
 import { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router-dom'
-import { NotFound } from './NotFound'
+import { Link, useParams } from 'react-router-dom'
 import { ProductListContext } from '../context/productListContext'
 import { CartContext } from '../context/cartContext'
-import { getProduct } from '../api'
 
 export function ProductDetail () {
   const { sku } = useParams()
-  const [product, setProduct] = useState({})
-  const [notFound, setNotFound] = useState({ isNotFound: false, errorMessage: '' })
-  const { productList, isLoading, setIsloading } = useContext(ProductListContext)
+  const [product, setProduct] = useState()
+  const [isError, setIsError] = useState(false)
+  const [isAlreadyAddedToCart, setIsAlreadyAddedToCart] = useState(false)
+  const [warningMessage, setWarningMessage] = useState(false)
+  const [isLoading, setIsloading] = useState(true)
+  const { productList } = useContext(ProductListContext)
   const { setCartItems } = useContext(CartContext)
 
-  const getProductFromContext = (sku) => {
-    return productList.find(product => product.sku === sku)
-  }
-
   const handleAddToCart = () => {
-    setCartItems(prev => [...prev, product])
+    if (isAlreadyAddedToCart) {
+      setWarningMessage(true)
+    } else {
+      setCartItems(prev => [...prev, product])
+      setIsAlreadyAddedToCart(true)
+    }
   }
 
   useEffect(() => {
-    const tempProduct = getProductFromContext(sku)
-
-    if (productList.length === 0) {
-      const fetchProduct = async () => {
-        try {
-          const res = await getProduct(sku)
-          setProduct(res)
-          setIsloading(false)
-        } catch (error) {
-          setIsloading(false)
-          setNotFound({
-            isNotFound: true,
-            errorMessage: error.message
-          })
-        }
-      }
-
-      fetchProduct()
-    } else if (tempProduct) {
-      setProduct({ ...tempProduct })
+    if (productList.length > 0) {
       setIsloading(false)
-    } else {
-      setIsloading(false)
-      setNotFound({
-        isNotFound: true,
-        errorMessage: `Product with ${sku} sku was not found`
-      })
+      const product = productList.find(product => product.sku === sku)
+      if (!product) return setIsError(true)
+      setProduct(product)
     }
-  }, [sku])
-
-  if (isLoading) return <p>loading...</p>
-  if (notFound.isNotFound) return <NotFound notFound={notFound} />
+  }, [sku, productList])
 
   return (
     <div>
-      <h1>{product.name}</h1>
-      {product.inStock
-        ? <p>price: {product.price}</p>
-        : <p> Out of Stock </p>}
-      <p>Description: {product.description}</p>
-      <p>SKU: {product.sku}</p>
-      <img src={product.img} alt={product.description} />
-      <button type='button' onClick={handleAddToCart}>Add to Cart</button>
+      {isLoading && <p>loading...</p>}
+      {product &&
+        <>
+          {warningMessage && <p>Each product can only be added once in to cart.</p>}
+          <h1>{product.name}</h1>
+          {product.inStock
+            ? <p>price: {product.price}</p>
+            : <p> Out of Stock </p>}
+          <p>Description: {product.description}</p>
+          <p>SKU: {product.sku}</p>
+          <img src={product.img} alt={product.description} />
+          <button type='button' onClick={handleAddToCart}>Add to Cart</button>
+        </>}
+      {isError &&
+        <>
+          <h1>Product Not found</h1>
+          <Link to='/products'>Go back to products</Link>
+        </>}
     </div>
   )
 }

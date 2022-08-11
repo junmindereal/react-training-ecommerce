@@ -10,6 +10,8 @@ export function Cart () {
     setCartItems(newCartItems)
   }
 
+  if (cartItems.length === 0) return <div>Cart is empty</div>
+
   return (
     <ul>
       {cartItems.map(product => (

@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom'
 import { CartContext } from '../context/cartContext'
 
 export function Cart () {
-  const { cartItems, setCartItems } = useContext(CartContext)
+  const { cartItems, removeFromCart } = useContext(CartContext)
 
   const handleRemoveFromCart = (sku) => {
-    const newCartItems = cartItems.filter(product => sku !== product.sku)
-    setCartItems(newCartItems)
+    removeFromCart(sku)
   }
 
   if (cartItems.length === 0) return <div>Cart is empty</div>

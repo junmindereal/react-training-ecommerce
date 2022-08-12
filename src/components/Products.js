@@ -1,28 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { getProductsList } from '../api'
+import { ProductListContext } from '../context/productListContext'
 
 export function Products () {
-  const [productList, setProductList] = useState([])
-  const [isLoading, setIsloading] = useState(true)
+  const { productList, isLoading } = useContext(ProductListContext)
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState('all')
   const [sort, setSort] = useState('name')
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await getProductsList()
-        setProductList(res)
-        setProducts(res)
-        setIsloading(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchProducts()
-  }, [])
 
   useEffect(() => {
     const filteredProduct = getFilteredProducts(productList, filter)
@@ -30,7 +14,7 @@ export function Products () {
     setProducts([...sortedProduct])
   }, [productList, sort, filter])
 
-  function getFilteredProducts (products, type) {
+  const getFilteredProducts = (products, type) => {
     if (type === 'all') {
       return products
     } else {
@@ -38,7 +22,7 @@ export function Products () {
     }
   }
 
-  function getSortedProducts (products, sort) {
+  const getSortedProducts = (products, sort) => {
     if (sort === 'price') {
       return products.sort((a, b) => {
         return a.price - b.price
@@ -54,11 +38,11 @@ export function Products () {
     return products
   }
 
-  function handleFilter (event) {
+  const handleFilter = (event) => {
     setFilter(event.target.value)
   }
 
-  function handleSort (event) {
+  const handleSort = (event) => {
     setSort(event.target.value)
   }
 

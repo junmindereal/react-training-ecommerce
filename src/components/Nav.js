@@ -10,6 +10,9 @@ export function Nav () {
         <li>
           <NavLink to='/products'>Products</NavLink>
         </li>
+        <li>
+          <NavLink to='/cart'>Cart</NavLink>
+        </li>
       </ul>
     </nav>
   )

@@ -1,6 +1,9 @@
+import { useContext } from 'react'
+import { AccountContext } from '../context/accountContext'
 import { NavLink } from 'react-router-dom'
 
 export function Nav () {
+  const { isLoggedIn } = useContext(AccountContext)
   return (
     <nav>
       <ul>
@@ -13,6 +16,9 @@ export function Nav () {
         <li>
           <NavLink to='/cart'>Cart</NavLink>
         </li>
+        {isLoggedIn
+          ? <li><NavLink to='/account'>Account</NavLink></li>
+          : <li><NavLink to='/login'>login</NavLink></li>}
       </ul>
     </nav>
   )

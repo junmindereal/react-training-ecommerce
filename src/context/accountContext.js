@@ -1,28 +1,21 @@
 import { createContext, useState, useEffect } from 'react'
-import { apiLogin, apiGetAccount } from '../api'
+import { apiGetAccount } from '../api'
 
 export const AccountContext = createContext()
 
 export const AccountProvider = ({ children }) => {
   const [user, setUser] = useState()
-  const [login, setLogin] = useState({})
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsloading] = useState(false)
   const [hasError, setHasError] = useState()
+  const lsAuthToken = window.localStorage.getItem('authToken')
+
+  const logout = () => {
+    window.localStorage.removeItem('authToken')
+    setIsLoggedIn(false)
+  }
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await apiLogin(login)
-        setUser(res)
-        setIsLoggedIn(true)
-      } catch (error) {
-        setHasError(error)
-      } finally {
-        setIsloading(false)
-      }
-    }
-
     const fetchUserbyToken = async (token) => {
       try {
         const res = await apiGetAccount(token)
@@ -35,20 +28,14 @@ export const AccountProvider = ({ children }) => {
       }
     }
 
-    if (Object.keys(login).length > 0) {
-      setIsloading(true)
-      fetchUser()
-    }
-
     if ('authToken' in window.localStorage) {
-      const LSAuthToken = window.localStorage.getItem('authToken')
       setIsloading(true)
-      fetchUserbyToken(LSAuthToken)
+      fetchUserbyToken(lsAuthToken)
     }
-  }, [login, user])
+  }, [lsAuthToken])
 
   return (
-    <AccountContext.Provider value={{ user, login, setLogin, isLoggedIn, setIsLoggedIn, isLoading, hasError, setHasError }}>
+    <AccountContext.Provider value={{ user, setUser, isLoggedIn, setIsLoggedIn, isLoading, setIsloading, hasError, setHasError, logout }}>
       {children}
     </AccountContext.Provider>
   )

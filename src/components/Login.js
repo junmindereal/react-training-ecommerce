@@ -1,10 +1,20 @@
 import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AccountContext } from '../context/accountContext'
+import { apiLogin } from '../api'
 
 export function Login () {
   const navigate = useNavigate()
-  const { setLogin, isLoggedIn, isLoading, hasError, setHasError, user } = useContext(AccountContext)
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    isLoading,
+    setIsloading,
+    hasError,
+    setHasError,
+    user,
+    setUser
+  } = useContext(AccountContext)
   const [isValidEmail, setIsValidEmail] = useState(true)
   const [credentials, setCredentials] = useState({
     email: '',
@@ -31,20 +41,33 @@ export function Login () {
     })
   }
 
+  const fetchUser = async (login) => {
+    try {
+      const res = await apiLogin(login)
+      setUser(res)
+      setIsLoggedIn(true)
+      setIsloading(true)
+    } catch (error) {
+      setHasError(error)
+    } finally {
+      setIsloading(false)
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
+    setIsloading(true)
+
     if (hasError) {
       setHasError(null)
     }
 
     if (validateEmail(credentials.email)) {
-      setLogin(credentials)
+      fetchUser(credentials)
     } else {
       setIsValidEmail(false)
     }
   }
-
-  if (isLoading) return <p>Loading...</p>
 
   return (
     <form onSubmit={handleSubmit}>
@@ -67,6 +90,7 @@ export function Login () {
         />
       </label>
       <button>Login</button>
+      {isLoading && <p>Loading...</p>}
       {isLoggedIn && <p>Logged In </p>}
       {hasError && <p>{hasError.message}</p>}
       {!isValidEmail && <p>Please Enter Valid Email Address</p>}

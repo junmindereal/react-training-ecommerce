@@ -6,8 +6,6 @@ import { apiLogin } from '../api'
 export function Login () {
   const navigate = useNavigate()
   const {
-    isLoggedIn,
-    setIsLoggedIn,
     isLoading,
     setIsloading,
     hasError,
@@ -22,11 +20,11 @@ export function Login () {
   })
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (user) {
       window.localStorage.setItem('authToken', user.authToken)
       return navigate('/account')
     }
-  }, [isLoggedIn, user])
+  }, [user])
 
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email)
@@ -45,8 +43,6 @@ export function Login () {
     try {
       const res = await apiLogin(login)
       setUser(res)
-      setIsLoggedIn(true)
-      setIsloading(true)
     } catch (error) {
       setHasError(error)
     } finally {
@@ -91,7 +87,6 @@ export function Login () {
       </label>
       <button>Login</button>
       {isLoading && <p>Loading...</p>}
-      {isLoggedIn && <p>Logged In </p>}
       {hasError && <p>{hasError.message}</p>}
       {!isValidEmail && <p>Please Enter Valid Email Address</p>}
     </form>

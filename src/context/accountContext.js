@@ -5,14 +5,13 @@ export const AccountContext = createContext()
 
 export const AccountProvider = ({ children }) => {
   const [user, setUser] = useState()
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsloading] = useState(false)
   const [hasError, setHasError] = useState()
   const lsAuthToken = window.localStorage.getItem('authToken')
 
   const logout = () => {
     window.localStorage.removeItem('authToken')
-    setIsLoggedIn(false)
+    setUser(null)
   }
 
   useEffect(() => {
@@ -20,7 +19,6 @@ export const AccountProvider = ({ children }) => {
       try {
         const res = await apiGetAccount(token)
         setUser(res)
-        setIsLoggedIn(true)
       } catch (error) {
         setHasError(error)
       } finally {
@@ -35,7 +33,7 @@ export const AccountProvider = ({ children }) => {
   }, [lsAuthToken])
 
   return (
-    <AccountContext.Provider value={{ user, setUser, isLoggedIn, setIsLoggedIn, isLoading, setIsloading, hasError, setHasError, logout }}>
+    <AccountContext.Provider value={{ user, setUser, isLoading, setIsloading, hasError, setHasError, logout }}>
       {children}
     </AccountContext.Provider>
   )

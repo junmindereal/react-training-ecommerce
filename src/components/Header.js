@@ -6,13 +6,13 @@ import { AccountContext } from '../context/accountContext'
 
 export function Header () {
   const { cartItems } = useContext(CartContext)
-  const { isLoggedIn } = useContext(AccountContext)
+  const { user } = useContext(AccountContext)
 
   return (
     <header>
       <Nav />
       <div>Cart: {cartItems.length} </div>
-      {isLoggedIn && <Logout />}
+      {user && <Logout />}
     </header>
   )
 }

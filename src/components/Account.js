@@ -4,11 +4,11 @@ import { AccountContext } from '../context/accountContext'
 
 export function Account () {
   const navigate = useNavigate()
-  const { user, isLoggedIn, isLoading } = useContext(AccountContext)
+  const { user, isLoading } = useContext(AccountContext)
 
   if (isLoading) return <p>loading...</p>
 
-  if (isLoggedIn) {
+  if (user) {
     return (
       <ul>
         <li><p>Email: {user.email}</p></li>
@@ -16,9 +16,7 @@ export function Account () {
         <li><p>Last Name: {user.lastName}</p></li>
       </ul>
     )
-  }
-
-  if (!user) {
+  } else if (!user) {
     return navigate('/login')
   }
 }

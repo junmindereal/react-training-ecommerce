@@ -1,42 +1,25 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { ProductListContext } from '../context/productListContext'
+import { Select } from '../../components/Select'
+import { ProductListContext } from '../../context/productListContext'
+import { getFilteredProducts } from '../../utils/getFilteredProducts'
+import { getSortedProducts } from '../../utils/getSortedProducts'
 
-export function Products () {
+export const ProductListingPage = () => {
   const { productList, isLoading } = useContext(ProductListContext)
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState('all')
   const [sort, setSort] = useState('name')
+  const sortSelectValues = ['name', 'price']
+  const sortSelectLabels = ['Name', 'Price']
+  const filterSelectValues = ['all', 'clothes', 'bag', 'shoes']
+  const filterSelectLabels = ['All', 'Clothes', 'Bag', 'Shoes']
 
   useEffect(() => {
     const filteredProduct = getFilteredProducts(productList, filter)
     const sortedProduct = getSortedProducts(filteredProduct, sort)
     setProducts([...sortedProduct])
   }, [productList, sort, filter])
-
-  const getFilteredProducts = (products, type) => {
-    if (type === 'all') {
-      return products
-    } else {
-      return products.filter(product => type === product.type)
-    }
-  }
-
-  const getSortedProducts = (products, sort) => {
-    if (sort === 'price') {
-      return products.sort((a, b) => {
-        return a.price - b.price
-      })
-    }
-    if (sort === 'name') {
-      return products.sort((a, b) => {
-        const priceA = a.name.toUpperCase()
-        const priceB = b.name.toUpperCase()
-        return priceA > priceB ? 1 : -1
-      })
-    }
-    return products
-  }
 
   const handleFilter = (event) => {
     setFilter(event.target.value)
@@ -53,16 +36,18 @@ export function Products () {
   if (isLoading) return <p>Loading...</p>
   return (
     <>
-      <select value={sort} onChange={handleSort}>
-        <option value='name'>Name</option>
-        <option value='price'>Price</option>
-      </select>
-      <select value={filter} onChange={handleFilter}>
-        <option value='all'>All</option>
-        <option value='clothes'>Clothes</option>
-        <option value='bag'>Bag</option>
-        <option value='shoes'>Shoes</option>
-      </select>
+      <Select
+        selectValue={sort}
+        handleChange={handleSort}
+        optionValues={sortSelectValues}
+        optionLabels={sortSelectLabels}
+      />
+      <Select
+        selectValue={filter}
+        handleChange={handleFilter}
+        optionValues={filterSelectValues}
+        optionLabels={filterSelectLabels}
+      />
       <ul className='product-items'>
         {products.map(product => (
           <li key={product.sku} className='product-items-list'>

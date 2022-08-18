@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { Products } from './components/Products'
-import { ProductDetail } from './components/ProductDetail'
-import { NewProductForm } from './components/NewProductForm'
+import { HomePage } from './pages/HomePage'
 import { Header } from './components/Header'
+import { ProductListingPage } from './pages/ProductListingPage'
+
+import { ProductDetail } from './components/ProductDetail'
 import { NotFound } from './components/NotFound'
 import { Cart } from './components/Cart'
 import { Login } from './components/Login'
@@ -36,7 +37,7 @@ function App () {
           <CartProvider>
             <Header />
             <Routes>
-              <Route path='/' element={<NewProductForm defaultValues={defaultValues} onSubmit={onSubmit} />} />
+              <Route path='/' element={<HomePage defaultValues={defaultValues} onSubmit={onSubmit} />} />
               <Route
                 path='/account' element={
                   <ProtectedRoute>
@@ -45,7 +46,7 @@ function App () {
               }
               />
               <Route path='/login' element={<Login />} />
-              <Route path='/products' element={<Products />} />
+              <Route path='/products' element={<ProductListingPage />} />
               <Route path='/cart' element={<Cart />} />
               <Route path='/products/:sku' element={<ProductDetail />} />
               <Route path='*' element={<NotFound />} />

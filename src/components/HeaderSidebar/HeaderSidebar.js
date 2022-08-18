@@ -1,16 +1,26 @@
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../../context/cartContext'
 import { AccountContext } from '../../context/accountContext'
-import { Logout } from '../logout'
 
 export const HeaderSidebar = () => {
+  const navigate = useNavigate()
   const { cartItems } = useContext(CartContext)
-  const { user } = useContext(AccountContext)
+  const { user, logout } = useContext(AccountContext)
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <div>
       <div>Cart: {cartItems.length} </div>
-      {user && <Logout />}
+      {user &&
+        <>
+          <p>{`${user.firstName.charAt(0)} ${user.lastName.charAt(0)}`}</p>
+          <button onClick={handleLogout}>Logout</button>
+        </>}
     </div>
   )
 }

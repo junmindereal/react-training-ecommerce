@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
-import { AccountContext } from '../context/accountContext'
+import { AccountContext } from '../../context/accountContext'
 
 export const ProtectedRoute = ({ redirectPath = '/login', children }) => {
   const { user } = useContext(AccountContext)

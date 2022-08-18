@@ -4,12 +4,11 @@ import { Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { Header } from './components/Header'
 import { ProductListingPage } from './pages/ProductListingPage'
-
-import { ProductDetail } from './components/ProductDetail'
+import { ProductDetailPage } from './pages/ProductDetailPage'
 import { NotFound } from './components/NotFound'
-import { Cart } from './components/Cart'
-import { Login } from './components/Login'
-import { Account } from './components/Account'
+import { CartPage } from './pages/CartPage'
+import { LoginPage } from './pages/LoginPage'
+import { AccountPage } from './pages/AccountPage'
 import { ProtectedRoute } from './components/ProtectedRoute'
 
 import { ProductListProvider } from './context/productListContext'
@@ -41,14 +40,14 @@ function App () {
               <Route
                 path='/account' element={
                   <ProtectedRoute>
-                    <Account />
+                    <AccountPage />
                   </ProtectedRoute>
               }
               />
-              <Route path='/login' element={<Login />} />
+              <Route path='/login' element={<LoginPage />} />
               <Route path='/products' element={<ProductListingPage />} />
-              <Route path='/cart' element={<Cart />} />
-              <Route path='/products/:sku' element={<ProductDetail />} />
+              <Route path='/cart' element={<CartPage />} />
+              <Route path='/products/:sku' element={<ProductDetailPage />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </CartProvider>

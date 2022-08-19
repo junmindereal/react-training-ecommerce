@@ -1,0 +1,9 @@
+.header-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-item:not(:last-of-type) {
+    padding-right: 24px;
+  }
+}

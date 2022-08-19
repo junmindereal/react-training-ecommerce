@@ -1,0 +1,18 @@
+.btn {
+  display: block;
+  padding: 8px;
+  border: 0;
+  text-decoration: none;
+  text-align: center;
+  background-color: transparent;
+
+  &-primary {
+    color: $white;
+    background-color: $primary-color;
+  }
+
+  &-small {
+    width: 80px;
+  }
+}
+

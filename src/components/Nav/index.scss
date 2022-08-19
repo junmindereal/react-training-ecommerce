@@ -1,0 +1,29 @@
+.nav {
+  &-list {
+    display: flex;
+  }
+
+  &-item {
+    margin-right: 32px;
+  }
+
+  &-link {
+    text-decoration: none;
+    color: $white;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &-link::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin-top: 12px;
+    background-color: transparent;
+  }
+
+  &-link.active::after {
+    background-color: $teal900;
+  }
+}

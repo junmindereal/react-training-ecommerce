@@ -1,0 +1,34 @@
+.link-icon {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  align-items: center;
+  color: $white;
+
+  &-label {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &-cart {
+    position: relative;
+  }
+
+  &-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -4px;
+    top: -8px;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    background-color: $teal900;
+    text-align: center;
+  }
+}
+

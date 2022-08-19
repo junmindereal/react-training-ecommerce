@@ -1,24 +1,24 @@
-import { useContext } from 'react'
-import { AccountContext } from '../../context/accountContext'
 import { NavLink } from 'react-router-dom'
 
 export const Nav = () => {
-  const { user } = useContext(AccountContext)
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to='/'>Home</NavLink>
+    <nav className='nav'>
+      <ul className='nav-list'>
+        <li className='nav-item'>
+          <NavLink className='nav-link' to='/'>Home</NavLink>
         </li>
-        <li>
-          <NavLink to='/products'>Products</NavLink>
+        <li className='nav-item'>
+          <NavLink className='nav-link' to='/products'>Products</NavLink>
         </li>
-        <li>
-          <NavLink to='/cart'>Cart</NavLink>
+        <li className='nav-item'>
+          <NavLink className='nav-link' to='/clothes'>Clothes</NavLink>
         </li>
-        {user
-          ? <li><NavLink to='/account'>Account</NavLink></li>
-          : <li><NavLink to='/login'>login</NavLink></li>}
+        <li className='nav-item'>
+          <NavLink className='nav-link' to='/bag'>Bag</NavLink>
+        </li>
+        <li className='nav-item'>
+          <NavLink className='nav-link' to='/shoes'>Shoes</NavLink>
+        </li>
       </ul>
     </nav>
   )

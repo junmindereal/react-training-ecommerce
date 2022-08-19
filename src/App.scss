@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+@import './variables';
+
+@import './components/Button/index';
+@import './components/IconButton/index';
+@import './components/Header/index';
+@import './components/Nav/index';
+@import './components/HeaderSidebar/index';
+
+/* Product Items */
+.product-items {
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.product-items-list {
+  margin: 30px 0;
+}
+
+.product-item {
+  width: 400px;
+}
+
+.product-item-img {
+  width: 200px;
+}
+
+.product-item-img img {
+  width: 100%;
+}

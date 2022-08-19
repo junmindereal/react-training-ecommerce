@@ -1,26 +1,33 @@
 import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { IconButton } from '../IconButton/IconButton'
 import { CartContext } from '../../context/cartContext'
 import { AccountContext } from '../../context/accountContext'
+import { ReactComponent as SearchIcon } from '../../static/svg/search-icon.svg'
+import { ReactComponent as CartIcon } from '../../static/svg/cart-icon.svg'
 
 export const HeaderSidebar = () => {
-  const navigate = useNavigate()
   const { cartItems } = useContext(CartContext)
-  const { user, logout } = useContext(AccountContext)
-
-  const handleLogout = () => {
-    logout()
-    navigate('/login')
-  }
+  const { user } = useContext(AccountContext)
 
   return (
-    <div>
-      <div>Cart: {cartItems.length} </div>
-      {user &&
-        <>
-          <p>{`${user.firstName.charAt(0)} ${user.lastName.charAt(0)}`}</p>
-          <button onClick={handleLogout}>Logout</button>
-        </>}
-    </div>
+    <ul className='header-sidebar'>
+      {user
+        ? <li className='header-sidebar-item'><NavLink to='/account'>{`${user.firstName.charAt(0)} ${user.lastName.charAt(0)}`}</NavLink></li>
+        : <li className='header-sidebar-item'><NavLink className='btn btn-primary btn-small' to='/login'>login</NavLink></li>}
+      <li className='header-sidebar-item'>
+        <IconButton to='/search' className='link-icon link-icon-search'>
+          <SearchIcon className='link-icon-svg' />
+          <span className='link-icon-label'>Search</span>
+        </IconButton>
+      </li>
+      <li className='header-sidebar-item'>
+        <IconButton to='/cart' className='link-icon link-icon-cart'>
+          {cartItems.length > 0 ? <span className='link-icon-count'>{cartItems.length} </span> : null}
+          <CartIcon className='link-icon-svg' />
+          <span className='link-icon-label'>Cart</span>
+        </IconButton>
+      </li>
+    </ul>
   )
 }

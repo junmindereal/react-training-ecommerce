@@ -15,7 +15,7 @@ import { ProductListProvider } from './context/productListContext'
 import { CartProvider } from './context/cartContext'
 import { AccountProvider } from './context/accountContext'
 
-import './App.css'
+import './App.scss'
 
 function App () {
   const data = {

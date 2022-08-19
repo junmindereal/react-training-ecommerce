@@ -3,7 +3,7 @@ import { HeaderSidebar } from '../HeaderSidebar'
 
 export const Header = () => {
   return (
-    <header>
+    <header className='header'>
       <Nav />
       <HeaderSidebar />
     </header>

@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { AccountContext } from '../context/accountContext'
+import { AccountContext } from '../../context/accountContext'
 import { NavLink } from 'react-router-dom'
 
-export function Nav () {
+export const Nav = () => {
   const { user } = useContext(AccountContext)
   return (
     <nav>

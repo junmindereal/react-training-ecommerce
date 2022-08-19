@@ -1,9 +1,12 @@
 import { useState, useEffect, useContext } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { ProductListContext } from '../context/productListContext'
-import { CartContext } from '../context/cartContext'
+import { useParams } from 'react-router-dom'
+import { NotFound } from '../../components/NotFound'
+import { Product } from '../../components/Product'
 
-export function ProductDetail () {
+import { CartContext } from '../../context/cartContext'
+import { ProductListContext } from '../../context/productListContext'
+
+export const ProductDetailPage = () => {
   const { sku } = useParams()
   const { productList, isLoading } = useContext(ProductListContext)
   const { cartItems, addToCart } = useContext(CartContext)
@@ -22,7 +25,7 @@ export function ProductDetail () {
   useEffect(() => {
     if (productList.length > 0) {
       const product = productList.find(product => product.sku === sku)
-      if (!product) return setIsError(true)
+      if (!product) return setIsError({ errorMessage: `Product with ${sku} sku was not found` })
       setProduct(product)
     }
   }, [sku, productList])
@@ -33,20 +36,10 @@ export function ProductDetail () {
       {product &&
         <>
           {isAlreadyAddedToCart && <p>Each product can only be added once in to cart.</p>}
-          <h1>{product.name}</h1>
-          {product.inStock
-            ? <p>price: {product.price}</p>
-            : <p> Out of Stock </p>}
-          <p>Description: {product.description}</p>
-          <p>SKU: {product.sku}</p>
-          <img src={product.img} alt={product.description} />
+          <Product product={product} noLink />
           <button type='button' onClick={handleAddToCart}>Add to Cart</button>
         </>}
-      {isError &&
-        <>
-          <h1>Product Not found</h1>
-          <Link to='/products'>Go back to products</Link>
-        </>}
+      {isError && <NotFound notFound={isError} />}
     </div>
   )
 }

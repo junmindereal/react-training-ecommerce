@@ -1,9 +1,11 @@
 import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AccountContext } from '../context/accountContext'
-import { apiLogin } from '../api'
+import { apiLogin } from '../../api'
+import { AccountContext } from '../../context/accountContext'
+import { fetchUser } from '../../utils/fetchUser'
+import { validateEmail } from '../../utils/validateEmail'
 
-export function Login () {
+export const LoginPage = () => {
   const navigate = useNavigate()
   const {
     isLoading,
@@ -26,10 +28,6 @@ export function Login () {
     }
   }, [user])
 
-  const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email)
-  }
-
   const onChange = (event) => {
     const { name, value } = event.target
 
@@ -37,17 +35,6 @@ export function Login () {
       ...credentials,
       [name]: value
     })
-  }
-
-  const fetchUser = async (login) => {
-    try {
-      const res = await apiLogin(login)
-      setUser(res)
-    } catch (error) {
-      setHasError(error)
-    } finally {
-      setIsloading(false)
-    }
   }
 
   const handleSubmit = (event) => {
@@ -59,7 +46,7 @@ export function Login () {
     }
 
     if (validateEmail(credentials.email)) {
-      fetchUser(credentials)
+      fetchUser(credentials, apiLogin, setUser, setHasError, setIsloading)
     } else {
       setIsValidEmail(false)
     }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
-export function NotFound ({ notFound }) {
-  function ErrorMessage ({ errorMessage }) {
+export const NotFound = ({ notFound }) => {
+  const ErrorMessage = ({ errorMessage }) => {
     return (
       <>
         <p> {errorMessage} </p>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export function NewProductForm ({ defaultValues, onSubmit }) {
+export const NewProductForm = ({ defaultValues, onSubmit }) => {
   const [product, setProduct] = useState(defaultValues)
 
   const handleSubmit = (event) => {

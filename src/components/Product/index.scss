@@ -1,0 +1,24 @@
+.product-item {
+  padding: 24px;
+  background-color: $white;
+
+  &-img {
+
+    img {
+      width: 100%;
+    }
+  }
+
+
+  &-name {
+    margin: 18px 0;
+
+    a {
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: $gray900;
+    }
+  }
+}

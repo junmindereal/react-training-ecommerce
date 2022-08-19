@@ -1,0 +1,15 @@
+.product-list {
+  padding-bottom: 42px;
+
+  &-title {
+    margin-bottom: 24px;
+    font-size: 40px;
+    text-transform: uppercase;
+  }
+}
+
+.product-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 32px;
+}

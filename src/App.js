@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { HomePage } from './pages/HomePage'
@@ -18,17 +17,6 @@ import { AccountProvider } from './context/accountContext'
 import './App.scss'
 
 function App () {
-  const data = {
-    name: '',
-    sku: '',
-    description: '',
-    price: 0
-  }
-  const [defaultValues, setDefaultValues] = useState(data)
-  const onSubmit = (product) => {
-    setDefaultValues(product)
-  }
-
   return (
     <main className='main'>
       <AccountProvider>
@@ -36,7 +24,7 @@ function App () {
           <CartProvider>
             <Header />
             <Routes>
-              <Route path='/' element={<HomePage defaultValues={defaultValues} onSubmit={onSubmit} />} />
+              <Route path='/' element={<HomePage />} />
               <Route
                 path='/account' element={
                   <ProtectedRoute>

@@ -12,13 +12,26 @@ export const CartProduct = ({ product }) => {
 
   return (
     <ul className='cart-product-item'>
-      <li className='cart-product-item-img'><img src={img} alt={description} /></li>
-      <li className='cart-product-item-name'><Link to={`/products/${sku}`}>{name}</Link></li>
-      {selectedSize && <li className='cart-product-item-size'><span>{selectedSize}</span></li>}
-      <li className='cart-product-item-price'> <span className='price'>${price}</span> </li>
-      <li className='cart-product-item-desc'><span>{description}</span></li>
-      {qty && <li className='cart-product-item-qty'> <span className='qty'>{qty}</span> </li>}
-      <Button onClick={() => handleRemoveFromCart(product.id)}>x</Button>
+      <li className='cart-product-column-product'>
+        <Button onClick={() => handleRemoveFromCart(product.id)}>x</Button>
+        <img className='cart-product-item-img' src={img} alt={description} />
+        <Link className='cart-product-item-name' to={`/products/${sku}`}>{name}</Link>
+      </li>
+      <li className='cart-product-column-size'>
+        {selectedSize &&
+          <span className='cart-product-item-size'>{selectedSize}</span>}
+      </li>
+      <li className='cart-product-column-price'>
+        <span className='cart-product-item-price'>${price}</span>
+
+      </li>
+      <li className='cart-product-column-qty'>
+        {qty &&
+          <span className='cart-product-item-qty'>{qty}</span>}
+      </li>
+      <li className='cart-product-column-subtotal'>
+        <span className='cart-product-item-subtotal'>$123</span>
+      </li>
     </ul>
   )
 }

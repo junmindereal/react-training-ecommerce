@@ -1,0 +1,20 @@
+.cart-container {
+  padding: 80px;
+}
+
+.cart-label {
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding-bottom: 12px;
+    border-bottom: 1px solid $gray900;
+  }
+
+  &-item {
+    text-align: center;
+  }
+
+  &-item-product {
+    width: 420px;
+  }
+}

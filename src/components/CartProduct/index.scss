@@ -1,0 +1,37 @@
+.cart-product {
+
+  &-items {
+    padding: 24px 0;
+  }
+
+  &-column-product {
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      width: 420px;
+  }
+
+  &-column-size {
+    width: 150px;
+  }
+
+  &-item {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+
+      &:not(:last-of-type) {
+        border-bottom: 1px solid $gray100;
+      }
+  }
+  
+
+  &-item-img {
+    max-width: 100px;
+    margin: 0 42px;
+  }
+
+  &-item-name {
+    display: block;
+  }
+
+}

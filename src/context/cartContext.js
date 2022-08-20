@@ -18,7 +18,6 @@ export const CartProvider = ({ children }) => {
       tempProduct.qty++
       setCartItems([...updatedCartItems, tempProduct])
     } else {
-      setQty(qty++)
       setCartItems(prev => [...prev, { ...product }])
     }
 

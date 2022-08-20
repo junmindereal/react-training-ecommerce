@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { RadioGroup } from '../RadioGroup'
 import { Button } from '../Button'
@@ -7,16 +7,16 @@ import { CartContext } from '../../context/cartContext'
 export const Product = ({ product, noLink = false }) => {
   const { sku, name, description, inStock, price, sizes, img } = product
   const { addToCart } = useContext(CartContext)
-  const [productToCart, setProductToCart] = useState()
   const [selectedSize, setSelectedSize] = useState()
   const [selectSizeWarning, setSelecSizeWarning] = useState()
 
   const handleProductToCart = () => {
     if (!sizes || selectedSize) {
-      setProductToCart({
+      addToCart({
         ...product,
         selectedSize,
-        id: sku + selectedSize
+        id: sku + selectedSize,
+        qty: 1
       })
     } else {
       setSelecSizeWarning({
@@ -29,13 +29,6 @@ export const Product = ({ product, noLink = false }) => {
     setSelectedSize(event.target.value)
     setSelecSizeWarning(null)
   }
-
-  useEffect(() => {
-    if (productToCart) {
-      console.log({ productToCart })
-      addToCart(productToCart)
-    }
-  }, [productToCart])
 
   return (
     <ul className='product-item'>

@@ -12,14 +12,15 @@ export const CartProvider = ({ children }) => {
   }
 
   const addToCart = (product) => {
-    const [tempProduct] = cartItems.filter(p => product.id === p.id)
+    const tempProduct = cartItems.find(p => product.id === p.id)
+
     if (tempProduct) {
       const updatedCartItems = cartItems.filter(p => product.id !== p.id)
       tempProduct.qty++
       setCartItems([...updatedCartItems, tempProduct])
     } else {
       setQty(qty++)
-      setCartItems(prev => [...prev, { ...product, qty }])
+      setCartItems(prev => [...prev, { ...product }])
     }
 
     console.log({ cartItems })

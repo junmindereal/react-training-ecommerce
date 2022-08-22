@@ -16,7 +16,8 @@ export const Product = ({ product, noLink = false }) => {
         ...product,
         selectedSize,
         id: sku + selectedSize,
-        qty: 1
+        qty: 1,
+        subtotal: price
       })
     } else {
       setSelecSizeWarning({

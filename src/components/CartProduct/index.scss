@@ -8,12 +8,20 @@
       display: flex;
       align-items: center;
       justify-content: center; 
-      width: 420px;
   }
 
-  &-column-size {
-    width: 150px;
+  &-column-size,
+  &-column-price,
+  &-column-qty
+  {
+    text-align: center;
   }
+
+  &-column-subtotal {
+    text-align: right;
+    font-weight: 700;
+  }
+
 
   &-item {
       display: grid;

@@ -1,9 +1,18 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CartProduct } from '../../components/CartProduct'
 import { CartContext } from '../../context/cartContext'
 
 export const CartPage = () => {
   const { cartItems } = useContext(CartContext)
+  const [grandtotal, setGrandtotal] = useState()
+
+  useEffect(() => {
+    const subtotals = cartItems.map(item => {
+      return item.subtotal
+    })
+
+    setGrandtotal(subtotals.reduce((a, b) => a + b, 0))
+  }, [cartItems])
 
   if (cartItems.length === 0) return <div>Cart is empty</div>
 
@@ -23,6 +32,7 @@ export const CartPage = () => {
           </li>
         ))}
       </ul>
+      <div className='cart-grandtotal'>Grand Total: ${grandtotal}</div>
     </section>
   )
 }

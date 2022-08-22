@@ -1,19 +1,47 @@
-import { useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/cartContext'
 import { Button } from '../Button'
 
 export const CartProduct = ({ product }) => {
-  const { sku, name, description, price, selectedSize, img, qty } = product
-  const { removeFromCart } = useContext(CartContext)
-  const handleRemoveFromCart = (id) => {
-    removeFromCart(id)
+  const { sku, name, description, price, selectedSize, img, qty, id, subtotal } = product
+  const { removeFromCart, cartItems, setCartItems } = useContext(CartContext)
+  const [thisQty, setThisQty] = useState(qty)
+  const [thisProduct, setThisProduct] = useState(cartItems.find(p => id === p.id))
+
+  useEffect(() => {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === id) {
+        return thisProduct
+      } else {
+        return item
+      }
+    })
+    setCartItems([...updatedCartItems])
+  }, [thisProduct])
+
+  const handleRemoveFromCart = (productId) => {
+    removeFromCart(productId)
+  }
+
+  const handleQtyOnBlur = (event) => {
+    const qtyValue = event.target.value
+    setThisProduct({
+      ...thisProduct,
+      qty: qtyValue,
+      subtotal: price * qtyValue
+    })
+    console.log({ thisProduct })
+  }
+
+  const handleQtyOnChange = (event) => {
+    setThisQty(event.target.value)
   }
 
   return (
     <ul className='cart-product-item'>
       <li className='cart-product-column-product'>
-        <Button onClick={() => handleRemoveFromCart(product.id)}>x</Button>
+        <Button onClick={() => handleRemoveFromCart(id)}>x</Button>
         <img className='cart-product-item-img' src={img} alt={description} />
         <Link className='cart-product-item-name' to={`/products/${sku}`}>{name}</Link>
       </li>
@@ -26,11 +54,17 @@ export const CartProduct = ({ product }) => {
 
       </li>
       <li className='cart-product-column-qty'>
-        {qty &&
-          <span className='cart-product-item-qty'>{qty}</span>}
+        <input
+          type='text'
+          required
+          name='qty'
+          value={thisQty}
+          onBlur={handleQtyOnBlur}
+          onChange={handleQtyOnChange}
+        />
       </li>
       <li className='cart-product-column-subtotal'>
-        <span className='cart-product-item-subtotal'>$123</span>
+        <span className='cart-product-item-subtotal'>${subtotal}</span>
       </li>
     </ul>
   )

@@ -8,13 +8,16 @@
     grid-template-columns: repeat(5, 1fr);
     padding-bottom: 12px;
     border-bottom: 1px solid $gray900;
+    font-weight: 600;
   }
 
   &-item {
     text-align: center;
   }
+}
 
-  &-item-product {
-    width: 420px;
-  }
+.cart-grandtotal {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: right;
 }

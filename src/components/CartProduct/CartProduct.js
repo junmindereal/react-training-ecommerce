@@ -8,18 +8,6 @@ export const CartProduct = ({ product }) => {
   const { sku, name, description, price, selectedSize, img, qty, id, subtotal } = product
   const { removeFromCart, cartItems, setCartItems } = useContext(CartContext)
   const [thisQty, setThisQty] = useState(qty)
-  const [thisProduct, setThisProduct] = useState(cartItems.find(p => id === p.id))
-
-  useEffect(() => {
-    const updatedCartItems = cartItems.map((item) => {
-      if (item.id === id) {
-        return thisProduct
-      } else {
-        return item
-      }
-    })
-    setCartItems([...updatedCartItems])
-  }, [thisProduct])
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId)
@@ -27,12 +15,14 @@ export const CartProduct = ({ product }) => {
 
   const handleQtyOnBlur = (event) => {
     const qtyValue = event.target.value
-    setThisProduct({
-      ...thisProduct,
-      qty: qtyValue,
-      subtotal: price * qtyValue
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === id) {
+        return { ...item, qty: qtyValue, subtotal: price * qtyValue }
+      } else {
+        return item
+      }
     })
-    console.log({ thisProduct })
+    setCartItems([...updatedCartItems])
   }
 
   const handleQtyOnChange = (event) => {

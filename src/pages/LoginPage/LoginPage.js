@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiLogin } from '../../api'
+import { Button } from '../../components/Button'
 import { AccountContext } from '../../context/accountContext'
 import { fetchUser } from '../../utils/fetchUser'
 import { validateEmail } from '../../utils/validateEmail'
@@ -53,29 +54,36 @@ export const LoginPage = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label> Email
-        <input
-          type='text'
-          required
-          name='email'
-          value={credentials.email}
-          onChange={onChange}
-        />
-      </label>
-      <label> Password
-        <input
-          type='password'
-          required
-          name='password'
-          value={credentials.password}
-          onChange={onChange}
-        />
-      </label>
-      <button>Login</button>
-      {isLoading && <p>Loading...</p>}
-      {hasError && <p>{hasError.message}</p>}
-      {!isValidEmail && <p>Please Enter Valid Email Address</p>}
-    </form>
+    <section className='login-form-container'>
+      <article className='login-form-wrapper'>
+        <h1 className='login-form-title'>Login</h1>
+        <form className='login-form' onSubmit={handleSubmit}>
+          <label className='login-form-label'> Email
+            <input
+              className='login-form-input'
+              type='text'
+              required
+              name='email'
+              value={credentials.email}
+              onChange={onChange}
+            />
+          </label>
+          <label className='login-form-label'> Password
+            <input
+              className='login-form-input'
+              type='password'
+              required
+              name='password'
+              value={credentials.password}
+              onChange={onChange}
+            />
+          </label>
+          <Button className='btn btn-primary btn-full'>Login</Button>
+          {isLoading && <p className='form-message notice'>Loading...</p>}
+          {hasError && <p className='form-message error'>{hasError.message}</p>}
+          {!isValidEmail && <p className='form-message error'>Please Enter Valid Email Address</p>}
+        </form>
+      </article>
+    </section>
   )
 }

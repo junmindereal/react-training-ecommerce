@@ -13,7 +13,7 @@ export const HeaderSidebar = () => {
   return (
     <ul className='header-sidebar'>
       {user
-        ? <li className='header-sidebar-item'><NavLink to='/account'>{`${user.firstName.charAt(0)} ${user.lastName.charAt(0)}`}</NavLink></li>
+        ? <li className='header-sidebar-item'><NavLink className='header-account-link' to='/account'>{`${user.firstName.charAt(0)} ${user.lastName.charAt(0)}`}</NavLink></li>
         : <li className='header-sidebar-item'><NavLink className='btn btn-primary btn-small' to='/login'>login</NavLink></li>}
       <li className='header-sidebar-item'>
         <IconButton to='/search' className='link-icon link-icon-search'>

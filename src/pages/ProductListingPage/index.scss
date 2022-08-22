@@ -1,0 +1,25 @@
+.product-listing {
+  &-page {
+    padding: 80px;
+  }
+
+  &-config {
+    display: flex;
+    margin-bottom: 24px;
+
+    &-filter,
+    &-sort {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-filter {
+      margin-right: 12px;
+    }
+
+    &-label {
+      margin-bottom: 12px;
+    }
+  }
+
+}

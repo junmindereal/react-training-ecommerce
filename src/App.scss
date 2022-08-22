@@ -14,6 +14,9 @@
 
 @import './pages/HomePage/index';
 @import './pages/CartPage/index';
+@import './pages/LoginPage/index';
+@import './pages/AccountPage/index';
+@import './pages/ProductListingPage/index';
 
 .main {
   background-color: $gray100;

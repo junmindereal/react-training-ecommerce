@@ -31,19 +31,27 @@ export const ProductListingPage = () => {
 
   if (isLoading) return <p>Loading...</p>
   return (
-    <>
-      <Select
-        selectValue={sort}
-        handleChange={handleSort}
-        optionValues={sortSelectValues}
-        optionLabels={sortSelectLabels}
-      />
-      <Select
-        selectValue={filter}
-        handleChange={handleFilter}
-        optionValues={filterSelectValues}
-        optionLabels={filterSelectLabels}
-      />
+    <section className='product-listing-page'>
+      <div className='product-listing-config'>
+        <div className='product-listing-config-filter'>
+          <span className='product-listing-config-label'>Filter by:</span>
+          <Select
+            selectValue={filter}
+            handleChange={handleFilter}
+            optionValues={filterSelectValues}
+            optionLabels={filterSelectLabels}
+          />
+        </div>
+        <div className='product-listing-config-sort'>
+          <span className='product-listing-config-label'>Sort by:</span>
+          <Select
+            selectValue={sort}
+            handleChange={handleSort}
+            optionValues={sortSelectValues}
+            optionLabels={sortSelectLabels}
+          />
+        </div>
+      </div>
       <ul className='product-items'>
         {products.map(product => (
           <li key={product.sku} className='product-items-list'>
@@ -51,6 +59,6 @@ export const ProductListingPage = () => {
           </li>
         ))}
       </ul>
-    </>
+    </section>
   )
 }

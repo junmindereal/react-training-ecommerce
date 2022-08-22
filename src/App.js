@@ -3,6 +3,9 @@ import { Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { Header } from './components/Header'
 import { ProductListingPage } from './pages/ProductListingPage'
+import { ClothesPage } from './pages/ClothesPage'
+import { BagPage } from './pages/BagPage'
+import { ShoesPage } from './pages/ShoesPage'
 import { ProductDetailPage } from './pages/ProductDetailPage'
 import { NotFound } from './components/NotFound'
 import { CartPage } from './pages/CartPage'
@@ -34,6 +37,9 @@ function App () {
               />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/products' element={<ProductListingPage />} />
+              <Route path='/clothes' element={<ClothesPage />} />
+              <Route path='/bag' element={<BagPage />} />
+              <Route path='/shoes' element={<ShoesPage />} />
               <Route path='/cart' element={<CartPage />} />
               <Route path='/products/:sku' element={<ProductDetailPage />} />
               <Route path='*' element={<NotFound />} />

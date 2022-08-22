@@ -1,0 +1,1 @@
+export { ShoesPage } from './ShoesPage'

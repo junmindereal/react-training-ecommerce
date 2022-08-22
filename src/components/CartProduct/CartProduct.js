@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/cartContext'
-import { Button } from '../Button'
+import { IconButton } from '../IconButton/IconButton'
+import { ReactComponent as CrossIcon } from '../../static/svg/cross-icon.svg'
 
 export const CartProduct = ({ product }) => {
   const { sku, name, description, price, selectedSize, img, qty, id, subtotal } = product
@@ -41,7 +42,7 @@ export const CartProduct = ({ product }) => {
   return (
     <ul className='cart-product-item'>
       <li className='cart-product-column-product'>
-        <Button onClick={() => handleRemoveFromCart(id)}>x</Button>
+        <IconButton className='btn btn-icon' onClick={() => handleRemoveFromCart(id)}><CrossIcon /></IconButton>
         <img className='cart-product-item-img' src={img} alt={description} />
         <Link className='cart-product-item-name' to={`/products/${sku}`}>{name}</Link>
       </li>

@@ -1,0 +1,20 @@
+.breadcrumb {
+  &-container {
+    display: flex;
+    background-color: $white;
+    padding: 18px 80px;
+  }
+
+  &-link {
+    text-decoration: none;
+    color: $black;
+  }
+
+  &-separator {
+    margin: 0 8px;
+  }
+
+  &-current {
+    color: $gray300;
+  }
+}

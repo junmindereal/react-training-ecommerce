@@ -1,6 +1,5 @@
 .product-item {
   padding: 24px;
-  background-color: $white;
 
   &-img {
 
@@ -21,4 +20,23 @@
       color: $gray900;
     }
   }
+
+  &-desc, &-price {
+    margin-bottom: 8px;
+  }
+ 
+  &-warning {
+    margin-top: 8px;
+  }
+
+  .price {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .out-of-stock {
+    color: $red900;
+    font-weight: 700;
+  }
 }
+

@@ -5,6 +5,7 @@
   text-decoration: none;
   text-align: center;
   background-color: transparent;
+  cursor: pointer;
 
   &-primary {
     color: $white;
@@ -13,6 +14,27 @@
 
   &-small {
     width: 80px;
+  }
+
+  &-medium {
+    width: 120px;
+  }
+
+  &-full {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: $gray900;
+    text-transform: uppercase;
+  }
+
+  &-text-black {
+    color: $black;
+    font-weight: 600;
+  }
+
+  &-uppercase {
+    text-transform: uppercase;
   }
 }
 

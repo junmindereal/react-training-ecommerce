@@ -9,9 +9,17 @@
 @import './components/HeaderSidebar/index';
 @import './components/Product/index';
 @import './components/ProductList/index';
+@import './components/RadioGroup/index';
+@import './components/CartProduct/index';
 
 @import './pages/HomePage/index';
+@import './pages/CartPage/index';
+@import './pages/LoginPage/index';
+@import './pages/AccountPage/index';
+@import './pages/ProductListingPage/index';
 
 .main {
   background-color: $gray100;
+  max-width: 1440px;
+  margin: auto;
 }

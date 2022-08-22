@@ -5,13 +5,24 @@ export const CartContext = createContext()
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
 
-  const removeFromCart = (sku) => {
-    const newCartItems = cartItems.filter(product => sku !== product.sku)
+  const removeFromCart = (id) => {
+    const newCartItems = cartItems.filter(product => id !== product.id)
     setCartItems(newCartItems)
   }
 
   const addToCart = (product) => {
-    setCartItems(prev => [...prev, product])
+    const tempProduct = cartItems.find(p => product.id === p.id)
+
+    if (tempProduct) {
+      const updatedCartItems = cartItems.filter(p => product.id !== p.id)
+      tempProduct.qty++
+      tempProduct.subtotal = tempProduct.price * tempProduct.qty
+      setCartItems([...updatedCartItems, tempProduct])
+    } else {
+      setCartItems(prev => [...prev, { ...product }])
+    }
+
+    console.log({ cartItems })
   }
 
   return (

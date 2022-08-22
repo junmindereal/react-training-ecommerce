@@ -16,10 +16,10 @@ export const AccountPage = () => {
 
   if (user) {
     return (
-      <div>
-        <p>{`Welcome, ${user.firstName} ${user.lastName}`}</p>
-        <Button onClick={handleLogout} className='btn btn-primary btn-small'>Logout</Button>
-      </div>
+      <section className='account-section'>
+        <p className='account-name'>{`Welcome, ${user.firstName} ${user.lastName}`}</p>
+        <Button onClick={handleLogout} className='btn btn-primary btn-medium btn-text-black btn-uppercase'>Logout</Button>
+      </section>
     )
   } else if (!user) {
     return navigate('/login')

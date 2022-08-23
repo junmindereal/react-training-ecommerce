@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Button } from '../../components/Button'
 import { AccountContext } from '../../context/accountContext'
 
@@ -9,6 +10,10 @@ export const AccountPage = () => {
 
   const handleLogout = () => {
     logout()
+    toast.success('Logout Successful!', {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1500
+    })
     navigate('/login')
   }
 

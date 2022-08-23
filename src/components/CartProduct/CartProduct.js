@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { CartContext } from '../../context/cartContext'
 import { IconButton } from '../IconButton/IconButton'
 import { ReactComponent as CrossIcon } from '../../static/svg/cross-icon.svg'
@@ -11,6 +12,9 @@ export const CartProduct = ({ product }) => {
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId)
+    toast.warn('Product has been removed from cart!', {
+      position: toast.POSITION.BOTTOM_RIGHT
+    })
   }
 
   const handleQtyOnBlur = (event) => {

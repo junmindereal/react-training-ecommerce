@@ -5,6 +5,7 @@ import { Button } from '../../components/Button'
 import { AccountContext } from '../../context/accountContext'
 import { fetchUser } from '../../utils/fetchUser'
 import { validateEmail } from '../../utils/validateEmail'
+import { toast } from 'react-toastify'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
@@ -25,6 +26,10 @@ export const LoginPage = () => {
   useEffect(() => {
     if (user) {
       window.localStorage.setItem('authToken', user.authToken)
+      toast.success('Login Successful!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1500
+      })
       return navigate('/account')
     }
   }, [user])

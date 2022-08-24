@@ -12,21 +12,25 @@ export const CartProduct = ({ product }) => {
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId)
-    toast.warn('Product has been removed from cart!', {
-      position: toast.POSITION.BOTTOM_RIGHT
-    })
+    toast.warn('Product has been removed from cart!')
   }
 
   const handleQtyOnBlur = (event) => {
-    const qtyValue = event.target.value
-    const updatedCartItems = cartItems.map((item) => {
-      if (item.id === id) {
-        return { ...item, qty: qtyValue, subtotal: price * qtyValue }
-      } else {
-        return item
-      }
-    })
-    setCartItems([...updatedCartItems])
+    const parsedQty = Number(event.target.value)
+    if (isNaN(parsedQty)) {
+      toast.error('Please enter a number on Quantity field!')
+      setThisQty(qty)
+    } else {
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, qty: parsedQty, subtotal: price * parsedQty }
+        } else {
+          return item
+        }
+      })
+
+      setCartItems([...updatedCartItems])
+    }
   }
 
   const handleQtyOnChange = (event) => {

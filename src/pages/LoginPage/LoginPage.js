@@ -26,10 +26,7 @@ export const LoginPage = () => {
   useEffect(() => {
     if (user) {
       window.localStorage.setItem('authToken', user.authToken)
-      toast.success('Login Successful!', {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1500
-      })
+      toast.success('Login Successful!')
       return navigate('/account')
     }
   }, [user])

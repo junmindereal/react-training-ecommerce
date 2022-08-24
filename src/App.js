@@ -25,7 +25,7 @@ import 'react-toastify/dist/ReactToastify.css'
 function App () {
   return (
     <main className='main'>
-      <ToastContainer />
+      <ToastContainer position='bottom-right' autoClose={1500} />
       <AccountProvider>
         <ProductListProvider>
           <CartProvider>

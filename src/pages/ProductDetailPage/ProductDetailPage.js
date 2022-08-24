@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Breadcrumb } from '../../components/Breadcrumb'
 import { Button } from '../../components/Button'
 import { NotFound } from '../../components/NotFound'
@@ -17,7 +18,6 @@ export const ProductDetailPage = () => {
   const [product, setProduct] = useState()
   const [isError, setIsError] = useState(false)
   const [selectedSize, setSelectedSize] = useState()
-  const [selectSizeWarning, setSelecSizeWarning] = useState()
   const [qty, setQty] = useState(1)
   const [mighLikeList, setMightLikeList] = useState([])
 
@@ -31,7 +31,13 @@ export const ProductDetailPage = () => {
   }, [sku, productList])
 
   const handleQtyOnBlur = (event) => {
-    setQty(parseInt(event.target.value))
+    const parsedQty = Number(event.target.value)
+    if (isNaN(parsedQty)) {
+      toast.error('Please enter a number on Quantity field!')
+      setQty(1)
+    } else {
+      setQty(parsedQty)
+    }
   }
 
   const handleQtyOnChange = (event) => {
@@ -48,15 +54,12 @@ export const ProductDetailPage = () => {
         subtotal: product.price * qty
       })
     } else {
-      setSelecSizeWarning({
-        message: 'Please select product size'
-      })
+      toast.warn('Please select product size!')
     }
   }
 
   const handleSelectSize = (event) => {
     setSelectedSize(event.target.value)
-    setSelecSizeWarning(null)
   }
 
   const handleMinusQty = () => {
@@ -107,10 +110,6 @@ export const ProductDetailPage = () => {
                 ? <p className='product-detail-price'>${product.price}</p>
                 : <p className='product-detail-out-of-stock'> Out of Stock </p>}
               <Button className='btn btn-primary btn-full' onClick={handleAddToCart}>Add to Cart</Button>
-              {selectSizeWarning &&
-                <div className='product-item-warning'>
-                  <p>{selectSizeWarning.message}</p>
-                </div>}
             </div>
             <div className='product-list-wrapper'>
               <ProductList title='Products You Might Like' productList={mighLikeList} isLoading={isLoading} className='might-like' />

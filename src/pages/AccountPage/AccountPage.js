@@ -10,10 +10,7 @@ export const AccountPage = () => {
 
   const handleLogout = () => {
     logout()
-    toast.success('Logout Successful!', {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 1500
-    })
+    toast.success('Logout Successful!')
     navigate('/login')
   }
 

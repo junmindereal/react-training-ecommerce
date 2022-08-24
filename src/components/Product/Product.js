@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { RadioGroup } from '../RadioGroup'
 import { Button } from '../Button'
 import { CartContext } from '../../context/cartContext'
@@ -8,7 +9,6 @@ export const Product = ({ product, noLink = false }) => {
   const { sku, name, description, inStock, price, sizes, img } = product
   const { addToCart } = useContext(CartContext)
   const [selectedSize, setSelectedSize] = useState()
-  const [selectSizeWarning, setSelecSizeWarning] = useState()
 
   const handleProductToCart = () => {
     if (!sizes || selectedSize) {
@@ -19,16 +19,14 @@ export const Product = ({ product, noLink = false }) => {
         qty: 1,
         subtotal: price
       })
+      toast.success('Product Added to Cart!')
     } else {
-      setSelecSizeWarning({
-        message: 'Please select product size'
-      })
+      toast.warn('Please select product size!')
     }
   }
 
   const handleSelectSize = (event) => {
     setSelectedSize(event.target.value)
-    setSelecSizeWarning(null)
   }
 
   return (
@@ -53,10 +51,6 @@ export const Product = ({ product, noLink = false }) => {
       <li className='product-item-action'>
         <Button onClick={handleProductToCart} className='btn btn-primary btn-full'>Add to Cart</Button>
       </li>
-      {selectSizeWarning &&
-        <li className='product-item-warning'>
-          <p>{selectSizeWarning.message}</p>
-        </li>}
       {product.selectedSize && <p>{product.selectedSize}</p>}
       {product.id && <p>{product.id}</p>}
     </ul>

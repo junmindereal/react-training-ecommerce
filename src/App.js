@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import { HomePage } from './pages/HomePage'
 import { Header } from './components/Header'
@@ -11,6 +12,7 @@ import { NotFound } from './components/NotFound'
 import { CartPage } from './pages/CartPage'
 import { LoginPage } from './pages/LoginPage'
 import { AccountPage } from './pages/AccountPage'
+import { SearchPage } from './pages/SearchPage'
 import { ProtectedRoute } from './components/ProtectedRoute'
 
 import { ProductListProvider } from './context/productListContext'
@@ -18,10 +20,12 @@ import { CartProvider } from './context/cartContext'
 import { AccountProvider } from './context/accountContext'
 
 import './App.scss'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App () {
   return (
     <main className='main'>
+      <ToastContainer position='bottom-right' autoClose={1500} />
       <AccountProvider>
         <ProductListProvider>
           <CartProvider>
@@ -41,6 +45,7 @@ function App () {
               <Route path='/bag' element={<BagPage />} />
               <Route path='/shoes' element={<ShoesPage />} />
               <Route path='/cart' element={<CartPage />} />
+              <Route path='/search' element={<SearchPage />} />
               <Route path='/products/:sku' element={<ProductDetailPage />} />
               <Route path='*' element={<NotFound />} />
             </Routes>

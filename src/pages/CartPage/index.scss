@@ -16,8 +16,15 @@
   }
 }
 
-.cart-grandtotal {
-  font-size: 32px;
-  font-weight: 700;
-  text-align: right;
+.cart {
+  &-grandtotal {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  &-empty {
+    font-size: 42px;
+    font-weight: 700;
+  }
 }

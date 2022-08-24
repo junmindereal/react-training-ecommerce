@@ -13,7 +13,13 @@ export const CartPage = () => {
     return total
   }, [cartItems])
 
-  if (cartItems.length === 0) return <div>Cart is empty</div>
+  if (cartItems.length === 0) {
+    return (
+      <section className='cart-container'>
+        <h1 className='cart-empty'>Cart is empty </h1>
+      </section>
+    )
+  }
 
   return (
     <section className='cart-container'>

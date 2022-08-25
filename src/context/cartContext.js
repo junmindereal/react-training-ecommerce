@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
 
     if (tempProduct) {
       const updatedCartItems = cartItems.filter(p => product.id !== p.id)
-      tempProduct.qty++
+      tempProduct.qty += product.qty
       tempProduct.subtotal = tempProduct.price * tempProduct.qty
       setCartItems([...updatedCartItems, tempProduct])
     } else {

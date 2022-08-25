@@ -10,8 +10,8 @@ export const HomePage = () => {
 
   useEffect(() => {
     if (productList.length > 0) {
-      setBestSellersList([...getRandomProducts(productList, 4)])
-      setNewArrivalsList([...getRandomProducts(productList, 3)])
+      setBestSellersList(getRandomProducts(productList, 4))
+      setNewArrivalsList(getRandomProducts(productList, 3))
     }
   }, [productList])
 

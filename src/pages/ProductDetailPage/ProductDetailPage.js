@@ -19,14 +19,15 @@ export const ProductDetailPage = () => {
   const [isError, setIsError] = useState(false)
   const [selectedSize, setSelectedSize] = useState()
   const [qty, setQty] = useState(1)
-  const [mighLikeList, setMightLikeList] = useState([])
+  const [mightLikeList, setMightLikeList] = useState([])
 
   useEffect(() => {
     if (productList.length > 0) {
       const product = productList.find(product => product.sku === sku)
+      const relatedProductList = productList.filter(p => p.type === product.type)
       if (!product) return setIsError({ errorMessage: `Product with ${sku} sku was not found` })
       setProduct(product)
-      setMightLikeList([...getRandomProducts(productList, 4)])
+      setMightLikeList(getRandomProducts(relatedProductList, 4))
     }
   }, [sku, productList])
 
@@ -88,11 +89,10 @@ export const ProductDetailPage = () => {
               <p className='product-detail-sku'>{sku}</p>
               <p className='product-detail-name'>{product.name}</p>
               <p className='product-detail-description'>{product.description}</p>
-              {product.sizes
-                ? <div className='product-detail-size'>
+              {product.sizes &&
+                <div className='product-detail-size'>
                   <RadioGroup handleChange={handleSelectSize} values={product.sizes} name={sku} />
-                </div>
-                : null}
+                </div>}
               <div className='product-detail-qty-wrapper'>
                 <Button className='btn btn-product-qty' onClick={handleMinusQty}>-</Button>
                 <input
@@ -112,7 +112,7 @@ export const ProductDetailPage = () => {
               <Button className='btn btn-primary btn-full' onClick={handleAddToCart}>Add to Cart</Button>
             </div>
             <div className='product-list-wrapper'>
-              <ProductList title='Products You Might Like' productList={mighLikeList} isLoading={isLoading} className='might-like' />
+              <ProductList title='Products You Might Like' productList={mightLikeList} isLoading={isLoading} className='might-like' />
             </div>
           </section>
         </>}

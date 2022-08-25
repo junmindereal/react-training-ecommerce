@@ -13,9 +13,8 @@ export const NotFound = ({ notFound }) => {
   return (
     <>
       <h1>Page Not Found</h1>
-      {notFound
-        ? <ErrorMessage errorMessage={notFound.errorMessage} />
-        : null}
+      {notFound &&
+        <ErrorMessage errorMessage={notFound.errorMessage} />}
     </>
   )
 }

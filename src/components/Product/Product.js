@@ -38,11 +38,10 @@ export const Product = ({ product, noLink = false }) => {
           : <Link to={`/products/${sku}`}>{name}</Link>}
       </li>
       <li className='product-item-desc'><span>{description}</span></li>
-      {sizes
-        ? <li className='product-item-size'>
+      {sizes &&
+        <li className='product-item-size'>
           <RadioGroup handleChange={handleSelectSize} values={sizes} name={sku} />
-          </li>
-        : null}
+        </li>}
       <li className='product-item-price'>
         {inStock
           ? <span className='price'>${price}</span>
@@ -51,8 +50,6 @@ export const Product = ({ product, noLink = false }) => {
       <li className='product-item-action'>
         <Button onClick={handleProductToCart} className='btn btn-primary btn-full'>Add to Cart</Button>
       </li>
-      {product.selectedSize && <p>{product.selectedSize}</p>}
-      {product.id && <p>{product.id}</p>}
     </ul>
   )
 }
